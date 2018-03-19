@@ -1,0 +1,99 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Search Bar With Autofill -->
+<h2><span style="color:#3C969C;">Cl</span>onevitae</h2>
+<div class="ui-widget">
+  <input id="gene_search_bar" placeholder="Search for genes">
+  <input type="submit" value="Go" style="background-color:#3C969C; color:white" onclick="searchForGene()">
+</div>
+
+<!-- Stub for datatable [#variant_table]-->
+<div id="hidden" style="display:none">
+     <table cellpadding="0" cellspacing="0" border="0" id="variant_table">
+         <tr></tr>
+         <tbody></tbody>
+    </table>
+</div>
+
+
+<!-- JQuery Datatable Code -->
+<script type="text/javascript" language="javascript" class="init">
+     $(document).ready(function() {
+
+        $('#variant_table').dataTable({
+            "dom": '<"top"if>rt<"bottom"lp><"clear">',
+            "scrollY": "500px",
+            "scrollCollapse": false,
+            "paging": false,
+            "order": [[ 1, "desc" ]],
+            "processing": true,
+            "ajax": {
+                "processing": true,
+                "url": "api/get_entries_for_gene/",
+                "dataSrc":"",
+                "data": function ( d ) {
+                        return $.extend( {}, d,
+                        {"gene": $('#gene_search_bar').val()}
+                        );}
+            },
+             "language": {
+                  "emptyTable": "No Results",
+                  "info": "_TOTAL_ results",
+                  "search": "Filter Results",
+                  "processing": "<img src='../static/spinner.gif'>"
+                },
+            "columns": [{"title":"GENE", "data": "fields.gene"},
+                    {"title":"NUCLEOTIDE CHANGE", "data":"fields.nucleotide_change"},
+                    {"title": "PROTEIN CHANGE", "data":"fields.protein_change"},
+                    {"title": "ALIAS", "data": "fields.alias"},
+                    {"title": "REGION", "data": "fields.region"},
+                    {"title": "REPORTED CLASSIFICATION", "data": "fields.reported_classification"},
+                    {"title": "LAST EVALUATED", "data": "fields.last_evaluated"},
+                    {"title": "LAST UPDATED", "data": "fields.last_updated"},
+                    {"title": "MORE INFO",
+                     "data": "fields.URL",
+                        "render":  function(data, type, row, meta){
+                            if(type === 'display'){
+                                   return '<a href="' + data + '">' + row.fields.source + '</a>'
+                            }
+                            else{
+                                return "";
+                            }
+                        }
+                    }
+             ]
+
+         });
+
+       });
+
+</script>
+
+<!-- JS For Autocomplete Search Box -->
+<script>
+
+$(function() {
+  $("#gene_search_bar").autocomplete({
+    source: "/api/get_autocomplete_options/",
+    minLength: 2,
+  });
+});
+
+</script>
+
+
+<!-- Script For Search Button -->
+<script>
+function searchForGene() {
+    $('#hidden').css( 'display', 'block' );
+    var table = $('#variant_table').DataTable();
+    table.clear();
+    table.ajax.reload();
+    table.draw();
+}
+</script>
+
+{% endblock %}
