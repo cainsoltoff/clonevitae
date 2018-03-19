@@ -53,7 +53,7 @@ class ClonevitaeTestAPI(TestCase):
 
     def test_autocomplete_api_status_codes(self):
         kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
-        url = reverse('get_autcomplete')
+        url = reverse('get_autocomplete')
         get_data = {'term': 'BR'}
         autocomplete_response = self.client.get(url, get_data, **kwargs)
         self.assertEqual(autocomplete_response.status_code, 200)
@@ -67,7 +67,7 @@ class ClonevitaeTestAPI(TestCase):
 
     def test_api_autofill_options(self):
         kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
-        url = reverse('get_autcomplete')
+        url = reverse('get_autocomplete')
         get_data = {'term': 'BR'}
         autocomplete_response = self.client.get(url, get_data, **kwargs)
         data = json.loads(autocomplete_response.content)
@@ -101,7 +101,7 @@ class ClonevitaeTestAPI(TestCase):
 
     def test_api_autofill_options_null(self):
         kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
-        url = reverse('get_autcomplete')
+        url = reverse('get_autocomplete')
         get_data = {'term': 'ZZXXXAA123'}
         autocomplete_response = self.client.get(url, get_data, **kwargs)
         data = json.loads(autocomplete_response.content)
