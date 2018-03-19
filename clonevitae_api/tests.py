@@ -51,21 +51,21 @@ class ClonevitaeTestAPI(TestCase):
         super(ClonevitaeTestAPI, cls).setUpClass()
         load_variant_db()
 
-    def test_autocomplete_api_page_status_codes(self):
+    def test_autocomplete_api_status_codes(self):
         kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
         url = reverse('get_autcomplete')
         get_data = {'term': 'BR'}
         autocomplete_response = self.client.get(url, get_data, **kwargs)
         self.assertEqual(autocomplete_response.status_code, 200)
 
-    def test_get_entries_for_gene_api_page_status_codes(self):
+    def test_get_entries_for_gene_api_status_codes(self):
         kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
         url = reverse('get_entries_for_gene')
         get_data = {'term': 'BRCA2'}
         gene_entries_response = self.client.get(url, get_data, **kwargs)
         self.assertEqual(gene_entries_response.status_code, 200)
 
-    def test_api_page_autofill_options(self):
+    def test_api_autofill_options(self):
         kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
         url = reverse('get_autcomplete')
         get_data = {'term': 'BR'}
@@ -75,7 +75,7 @@ class ClonevitaeTestAPI(TestCase):
         autocomplete_prefix_check = [x['value'].startswith('BR') for x in data]
         self.assertEqual(all(autocomplete_prefix_check), True)
 
-    def test_api_page_get_gene_options(self):
+    def test_api_get_gene_options(self):
         kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
         url = reverse('get_entries_for_gene')
         get_data = {'gene': 'BRCA2'}
@@ -90,7 +90,7 @@ class ClonevitaeTestAPI(TestCase):
         # probably better to set up tests that read the CSV file raw and check the DB
         # against that
 
-    def test_api_page_get_gene_options_null(self):
+    def test_api_get_gene_options_null(self):
         kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
         url = reverse('get_entries_for_gene')
         get_data = {'gene': 'ABC123QQQQ'}
@@ -99,7 +99,7 @@ class ClonevitaeTestAPI(TestCase):
 
         self.assertEqual(len(data), 0)
 
-    def test_api_page_autofill_options_null(self):
+    def test_api_autofill_options_null(self):
         kwargs = {'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
         url = reverse('get_autcomplete')
         get_data = {'term': 'ZZXXXAA123'}
