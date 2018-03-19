@@ -12,6 +12,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 python-dateutil = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 
 [dev-packages]

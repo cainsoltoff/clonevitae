@@ -1,0 +1,45 @@
+
+/* Styling for the autocomplete search box*/
+
+.ui-autocomplete {
+max-height: 250px;
+overflow-y: auto;
+overflow-x: hidden
+}
+
+#gene_search_bar
+{
+ border:2px solid #3C969C;
+ border-bottom: 4px solid #3C969C;
+ border-right: 4px solid #3C969C;
+ margin-left: 1px;
+}
+
+/* Styling for the variant table*/
+
+table.dataTable tr.odd { background-color: #e7e6e6; }
+table.dataTable tr.odd td.sorting_1 { background-color: #d5f0eb;}
+table.dataTable tr.odd:hover { background-color: #d5f0eb; }
+
+table.dataTable tr.even td.sorting_1 { background-color: #c6e3dd;}
+table.dataTable tr.even:hover { background-color: #c6e3dd; }
+table.dataTable tr.even { background-color: white; }
+
+table.dataTable th {
+background-color:#3C969C;
+color:#ffffff;
+font-size:10px;
+}
+
+table.dataTable tr {
+font-size:10px;
+
+}
+
+table.dataTable thead th.sorting_asc {
+    background: #66A9BD
+}
+
+table.dataTable thead th.sorting_desc {
+    background: #66A9BD
+}
