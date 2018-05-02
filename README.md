@@ -20,6 +20,6 @@ from helper import load_variant_db <br />
 load_variant_db() <br />
 exit() <br />
 
-#To Run Tests
+# To Run Tests
 pipenv shell <br />
 python manage.py tests <br />
